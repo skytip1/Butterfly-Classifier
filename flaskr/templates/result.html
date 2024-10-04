@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Butterfly Species Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2a9d8f;
+        }
+
+        .butterfly-image {
+            max-width: 300px;
+            height: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Butterfly Species: {{ species }}</h1>
+        {% if species != "Unknown species" %}
+            <img src="{{ url_for('static', filename='butterflies/' + species.replace(' ', '_') + '.jpg') }}" alt="{{ species }}" class="butterfly-image">
+        {% else %}
+            <p>Sorry, we couldn't identify the species.</p>
+        {% endif %}
+        <a href="/">Go back</a>
+    </div>
+</body>
+</html>

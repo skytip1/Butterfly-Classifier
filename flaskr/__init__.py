@@ -45,10 +45,19 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # Load the model
-    global model
-    model_path = r'C:\Users\skyla\OneDrive\Documents\Butterfly\instance\butterfly_classifier.h5'
-    model = load_model(model_path)
+    # Update model path to be relative to the instance folder
+    model_path = os.path.join(app.instance_path, 'butterfly_classifier.h5')
+
+    # Check if the model exists before loading it
+    if os.path.exists(model_path):
+        global model
+        model = load_model(model_path)
+    else:
+        raise FileNotFoundError(f"Model file not found at {model_path}")
+
+    # Ensure the uploads folder exists
+    if not os.path.exists('uploads'):
+        os.makedirs('uploads')
 
     @app.route('/')
     def index():

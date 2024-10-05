@@ -27,6 +27,7 @@ def preprocess_image(file_path):
     img_array /= 255.0
     return img_array
 
+# Function to create the Flask app
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
@@ -85,3 +86,7 @@ def create_app(test_config=None):
         return render_template('result.html', species=species)
 
     return app
+
+if __name__ == '__main__':
+    app = create_app()
+    app.run(host='0.0.0.0', port=5000)
